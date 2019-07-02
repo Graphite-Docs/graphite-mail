@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { setGlobal } from 'reactn';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { UserSession } from 'blockstack';
+import lists from './test_data/lists.json';
+import emails from './test_data/emails.json';
+import templates from './test_data/templates.json';
+import { appConfig } from './utils/config';
+
+const userSession = new UserSession({ appConfig })
+
+setGlobal({
+    userSession,
+    page: "dashboard",
+    listSelectionCount: 0,
+    proUser: false,
+    lists: [], 
+    emails: [], 
+    templates: [], 
+    csvFile: {}, 
+    importedContacts: [], 
+    emailConnected: false
+})
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

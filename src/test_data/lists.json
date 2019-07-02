@@ -1,0 +1,60 @@
+{
+    "lists": [
+        {
+            "id": "112",
+            "listName": "Business",
+            "contacts": [
+                {
+                    "id": "1",
+                    "email": "justin@graphitedocs.com",
+                    "name": "Justin Hunter", 
+                    "org": "Graphite",
+                    "dateAdded": {
+                        "year": "2019",
+                        "month": "04",
+                        "day": "2"
+                    }
+                }, 
+                {
+                    "id": "2",
+                    "email": "pbj@gmail.com",
+                    "name": "Prabhaav Bhardwhaj", 
+                    "org": "Stealthy", 
+                    "dateAdded": {
+                        "year": "2019",
+                        "month": "06",
+                        "day": "29"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "113",
+            "listName": "Personal",
+            "contacts": [
+                {
+                    "id": "1",
+                    "email": "kaelynmhunter@gmail.com",
+                    "name": "Kaelyn Hunter", 
+                    "org": "", 
+                    "dateAdded": {
+                        "year": "2019",
+                        "month": "05",
+                        "day": "20"
+                    }
+                }, 
+                {
+                    "id": "2",
+                    "email": "justin.edward.hunter@gmail.com",
+                    "name": "Justin Hunter", 
+                    "org": "", 
+                    "dateAdded": {
+                        "year": "2019",
+                        "month": "04",
+                        "day": "12"
+                    }
+                }
+            ]
+        }
+    ]
+}
