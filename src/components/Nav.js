@@ -1,11 +1,16 @@
 import React from 'reactn';
 import { Link } from 'react-router-dom';
 import { setPage } from '../helpers/routes';
+import { signOut } from '../helpers/authFunctions';
 
 export default class Nav extends React.Component {
+    handleEmailModal = () => {
+        document.getElementById('connection-modal').style.display = "block";
+        document.getElementById('dimmer').style.display = "block";
+    }
 
     render() {
-        const { proUser } = this.global;
+        const { proUser, emailConnected } = this.global;
         return (
             <nav className="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
                 <div className="container-fluid">
@@ -46,7 +51,8 @@ export default class Nav extends React.Component {
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <Link className="dropdown-item" onClick={() => setPage('user')} to={'/user'}>View Profile</Link>
                         <Link className="dropdown-item" onClick={() => setPage('user')} to={'/user'}>{ proUser ? "View Account Details": "Upgrade Account"}</Link>
-                        <a href="#" className="dropdown-item">Sign Out</a>
+                        { emailConnected ? <a className="dropdown-item" onClick={this.handleEmailModal}>Edit Email Connection</a> : <a className="dropdown-item" onClick={this.handleEmailModal}>Connect Email Service</a>}
+                        <a onClick={signOut} className="dropdown-item">Sign Out</a>
                         </div>
                     </li>
                     </ul>

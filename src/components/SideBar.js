@@ -11,7 +11,7 @@ export default class SideBar extends React.Component {
         return (
             <div id="sidebar" className="sidebar" data-color="white" data-active-color="danger">
                 <div className="logo">
-                    <a className="simple-text logo-mini">
+                    <a className="simple-text logo-mini link-button">
                     <div className="logo-image-small">
                         <img src={profile.image ? profile.image.filter(a => a.name === "avatar") ? profile.image.filter(a => a.name === "avatar")[0].contentUrl : defaultAvatar : defaultAvatar} />
                     </div>

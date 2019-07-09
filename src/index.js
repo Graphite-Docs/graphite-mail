@@ -19,9 +19,16 @@ setGlobal({
     lists: [], 
     emails: [], 
     templates: [], 
+    campaigns: [],
     csvFile: {}, 
     importedContacts: [], 
-    emailConnected: false
+    emailConnected: false, 
+    emailConnectionSettings: {}, 
+    emailDesign: {},
+    emailTemplate: {},
+    showTemplate: false,
+    newCampaign: false,
+    selectedCampaign: {}
 })
 
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -15,7 +15,7 @@ export default class ConnectEmailService extends React.Component {
                         <div className="card">
                             <div className="card-header">
                                 <h4><i style={{position: "relative", top: "3px", marginRight: "5px"}} className="nc-icon nc-settings-gear-65 text-primary"></i> Connect to your own email service</h4>
-                                <div class="card-body">
+                                <div className="card-body">
                                     <p>If you'd like to use your own email provider to send emails, you'll need the following: </p>
                                     <ul>
                                         <li>Host server URL (ex: smtp.your-email.com)</li>
@@ -34,7 +34,7 @@ export default class ConnectEmailService extends React.Component {
                         <div className="card">
                             <div className="card-header">
                                 <h4><i style={{position: "relative", top: "3px", marginRight: "5px"}} className="nc-icon nc-email-85 text-info"></i> Use Graphite Mail's hosted service</h4>
-                                <div class="card-body">
+                                <div className="card-body">
                                     <p>Graphite manages a hosted service through <a href="https://sendgrid.com">SendGrid</a>. As SendGrid is a paid service and there is significant overhead in managing emails for users who choose this service, it is only available as part of a Pro Plan.</p>
                                     {
                                         proUser ? 

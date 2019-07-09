@@ -4,9 +4,9 @@ import Main from './components/Main';
 import './App.css';
 import { setPage } from './helpers/routes';
 import { load } from './helpers/files';
-import Dimmer from './components/shared/Dimmer';
-import AddContactModal from './components/shared/AddContactModal';
-import ConnectionModal from './components/shared/ConnectionModal';
+import Dimmer from './components/modals/Dimmer';
+import AddContactModal from './components/modals/AddContactModal';
+import ConnectionModal from './components/modals/ConnectionModal';
 import SignIn from './components/SignIn';
 import Loading from './components/Loading';
 

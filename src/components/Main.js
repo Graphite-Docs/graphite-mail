@@ -5,7 +5,9 @@ import Lists from './Lists';
 import Emails from './Emails';
 import User from './User';
 import Footer from './Footer';
+import Template from './modals/Template';
 import DashboardPanel from './DashboardPanel';
+import Campaign from './modals/Campaign';
 
 export default class Main extends React.Component {
 
@@ -40,7 +42,8 @@ export default class Main extends React.Component {
             <div id="main-panel" className="main-panel">
 
               <Nav />
-
+              <Template />
+              <Campaign />
               {this.renderPanel()}
 
               <Footer />

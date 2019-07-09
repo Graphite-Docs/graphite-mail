@@ -1,7 +1,14 @@
 import React, { setGlobal } from 'reactn';
-import { handleAddList } from '../helpers/lists';
+import { handleAddList, handleDelete, handleDeleteList } from '../helpers/lists';
 
 export default class Lists extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        showConfirmDelete: false, 
+        showListDeleteConfirm: false
+      }
+    }
     handleListDisplay = (e) => {
       const { lists } = this.global;
       let listId = e.target.value;
@@ -24,8 +31,14 @@ export default class Lists extends React.Component {
       document.getElementById('new-list-button').style.display = "block";
     }
 
+    handleDelete = (listId, contactId) => {
+      handleDelete(listId, contactId)
+      this.setState({ showConfirmDelete: false });
+    }
+
     render() {
         const { proUser, lists, listSelectionCount } = this.global;
+        const { showConfirmDelete, showListDeleteConfirm } = this.state;
         return(
             <div className="content">
                 {
@@ -52,7 +65,10 @@ export default class Lists extends React.Component {
                       </div> : 
                       <div/>
                     }
-                  <h4>{lists[listSelectionCount].listName} List <span style={{fontSize: "12px", position: "relative", top: "-5px", left: "10px"}}><button onClick={this.handleAddModal} className="btn btn-primary btn-round">Add</button></span></h4>
+                  <h4>{lists[listSelectionCount].listName} List 
+                    <span style={{fontSize: "12px", position: "relative", top: "-5px", left: "10px"}}><button onClick={this.handleAddModal} className="btn btn-primary btn-round">Add</button></span>
+                    { showListDeleteConfirm ? <span style={{fontSize: "12px", float: "right"}}><button style={{background: "red"}} onClick={() => handleDeleteList(lists[listSelectionCount].id)} className="btn btn-round">Are You Sure?</button> <span className="pointer" onClick={() => this.setState({ showListDeleteConfirm: false})}>No, cancel</span></span> : <span style={{fontSize: "12px"}}><button style={{float: "right", background: "red"}} onClick={() => this.setState({ showListDeleteConfirm: true})} className="btn btn-round">Delete List</button></span>}
+                  </h4>
                   </div>
                   <div className="card-body">
                     <div className="table-responsive">
@@ -68,6 +84,7 @@ export default class Lists extends React.Component {
                             <th>
                               Organization
                             </th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -84,6 +101,7 @@ export default class Lists extends React.Component {
                                   <td>
                                     {item.org}
                                   </td>
+                                  <td>{showConfirmDelete ? <span><span onClick={() => this.handleDelete(lists[listSelectionCount].id, item.id)} className="delete pointer">Confirm?</span><span style={{marginLeft: "10px"}} onClick={() => this.setState({ showConfirmDelete: false })} className="pointer">Cancel</span></span> : <span onClick={() => this.setState({ showConfirmDelete: true })} className="delete pointer">Delete</span>}</td>
                                 </tr>
                               )
                             })

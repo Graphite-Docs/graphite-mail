@@ -33,6 +33,7 @@ export async function addContact(list) {
         } else {
             const postedData = {
                 fileName:"lists.json",
+                body: JSON.stringify(lists),
                 encrypt: true
             }
             const thisPost = await postData(postedData);
@@ -113,4 +114,48 @@ export function handleAddList() {
         contacts: []
     }
     setGlobal({ lists: [...lists, newList] });
+}
+
+export async function handleDelete(listId, contactId) {
+    let lists = getGlobal().lists;
+    let selectedList = lists.filter(list => list.id === listId)[0];
+    let contacts;
+    let index;
+    if(selectedList) {
+        contacts = selectedList.contacts;
+        index = contacts.map((x) => {return x.id }).indexOf(contactId);
+        if(index > -1) {
+            contacts.splice(index, 1);
+            setGlobal({ lists });
+            const postedData = {
+                fileName:"lists.json",
+                body: JSON.stringify(lists),
+                encrypt: true
+            }
+            const thisPost = await postData(postedData);
+            console.log(thisPost);
+        } else {
+            console.log("error with contact index");
+        }
+    } else {
+        console.log("error finding selected list");
+    }
+}
+
+export async function handleDeleteList(listId) {
+    let lists = getGlobal().lists;
+    let index = lists.map((x) => {return x.id }).indexOf(listId);
+    if(index > -1) {
+        lists.splice(index, 1);
+        setGlobal({ lists });
+        const postedData = {
+            fileName:"lists.json",
+            body: JSON.stringify(lists),
+            encrypt: true
+        }
+        const thisPost = await postData(postedData);
+        console.log(thisPost);
+    } else {
+        console.log("error with list index");
+    }
 }

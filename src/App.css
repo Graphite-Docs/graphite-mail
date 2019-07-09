@@ -31,3 +31,46 @@ a {
   border-radius: 10px;
   overflow: scroll;
 }
+
+.link-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.link-button:hover,
+.link-button:focus {
+  text-decoration: none;
+}
+
+#template-modal-new, #template-modal-existing, #campaign-modal {
+  position: fixed;
+  width: 80%;
+  margin: auto;
+  padding: 15px;
+  top: 80px;
+  right: 15px;
+  z-index: 999;
+  background: #fff;
+  border-radius: 10px;
+  overflow: scroll;
+}
+
+#template-modal-new div input, #template-modal-existing div input {
+  position: absolute;
+  top: 30px;
+  width: 30%;
+  left: 35%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.delete {
+  color: red;
+}

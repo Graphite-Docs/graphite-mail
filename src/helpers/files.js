@@ -14,7 +14,7 @@ export async function load() {
         decrypt: true
     }
     const fetchedLists = await fetchData(listData);
-    setGlobal({ lists: JSON.parse(fetchedLists || [])});
+    fetchedLists ? setGlobal({ lists: JSON.parse(fetchedLists)}) : setGlobal({ lists: [] });
 
     //Now we fetch email activity
     const emailData = {
@@ -22,15 +22,33 @@ export async function load() {
         decrypt: true
     }
     const fetchedEmails = await fetchData(emailData);
-    setGlobal({ emails: JSON.parse(fetchedEmails || [])});
-
+    fetchedEmails ? setGlobal({ emails: JSON.parse(fetchedEmails)}) : setGlobal({ emails: [] });
+    
     //Now we fetch templates
     const templateData = {
         fileName: "templates.json", 
         decrypt: true
     }
     const fetchedTemplates = await fetchData(templateData);
-    setGlobal({ templates: JSON.parse(fetchedTemplates || [])});
+    fetchedTemplates ? setGlobal({ templates: JSON.parse(fetchedTemplates)}) : setGlobal({ templates: []});
+
+    //Now we fetch campaigns
+    const campaignData = {
+        fileName: "campaigns.json", 
+        decrypt: true
+    }
+    const fetchedCampaigns = await fetchData(campaignData);
+    fetchedCampaigns ? setGlobal({ campaigns: JSON.parse(fetchedCampaigns)}) : setGlobal({ campaigns: []});
+
+    //Now we fetch the email connection info
+    const emailConnectionData = {
+        fileName: "connection.json", 
+        decrypt: true
+    }
+    const fetchedConnection = await fetchData(emailConnectionData);
+    if(fetchedConnection) {
+        setGlobal({ emailConnectionSettings: JSON.parse(fetchedConnection), emailConnected: true });
+    }
 }
 
 export function fetchData(params) {
