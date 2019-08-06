@@ -1,4 +1,5 @@
 import { getGlobal, setGlobal } from 'reactn';
+const main = require('./main');
 export function postData(params) {
   const userSession = getGlobal().userSession;
   return userSession.putFile(params.fileName, params.body, {encrypt: params.encrypt})
@@ -39,6 +40,21 @@ export async function load() {
     }
     const fetchedCampaigns = await fetchData(campaignData);
     fetchedCampaigns ? setGlobal({ campaigns: JSON.parse(fetchedCampaigns)}) : setGlobal({ campaigns: []});
+
+    //Now we can initialize charts
+    if(document.getElementById("chartHours")) {
+        main.initChartsPages();
+    }
+
+    //Now we fetch the account info
+    const accountData = {
+        fileName: "account.json", 
+        decrypt: true
+    }
+    const accountInfo = await fetchData(accountData);
+    if(accountInfo) {
+        setGlobal({ accountInfo: JSON.parse(accountInfo), proUser: true });
+    }
 
     //Now we fetch the email connection info
     const emailConnectionData = {

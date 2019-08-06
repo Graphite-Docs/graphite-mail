@@ -8,12 +8,12 @@ export default class Footer extends React.Component {
                   <nav>
                     <ul>
                       <li>
-                          <a href="https://graphitedocs.com/mail">
-                              Graphite Mail
+                          <a href="https://mailr.email">
+                              Mailr
                           </a>
                       </li>
                       <li>
-                          <a href="https://graphitedocs.com/about">
+                          <a href="https://mailr.email/about">
                              About Us
                           </a>
                       </li>

@@ -74,3 +74,18 @@ a {
 .delete {
   color: red;
 }
+
+.full-modal {
+  position: fixed;
+  top: 75px;
+  width: 70%;
+  left: 25%;
+  z-index: 999;
+  background: #fff;
+  border-radius: 10px;
+  overflow: scroll;
+}
+
+.checkbox-control {
+  margin-right: 5px;
+}

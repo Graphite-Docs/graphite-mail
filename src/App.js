@@ -1,17 +1,21 @@
-import React from 'reactn';
+import React, {setGlobal} from 'reactn';
 import {BrowserRouter} from 'react-router-dom';
 import Main from './components/Main';
+import './assets/css/bootstrap.min.css';
+import './assets/css/paper-dashboard.css?v=2.0.0';
 import './App.css';
 import { setPage } from './helpers/routes';
-import { load } from './helpers/files';
+import { load, postData } from './helpers/files';
 import Dimmer from './components/modals/Dimmer';
 import AddContactModal from './components/modals/AddContactModal';
 import ConnectionModal from './components/modals/ConnectionModal';
 import SignIn from './components/SignIn';
 import Loading from './components/Loading';
+import FormBuilder from './components/modals/FormBuilder';
+import { getMonthDayYear } from './helpers/dateHelpers';
 
 class App extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
     const { userSession} = this.global;
     if(userSession.isSignInPending()) {
         userSession.handlePendingSignIn().then(async () => {
@@ -22,6 +26,22 @@ class App extends React.Component {
     const page = window.location.pathname.split('/')[1];
     if(page === '') {
       setPage('dashboard');
+    } else if(page === 'payment-success') {
+      setGlobal({ proUser: true });
+      setPage('user');
+      const account = {
+        proUser: true,
+        initiationDate: getMonthDayYear()
+      }
+      const fileData = {
+        fileName: 'account.json', 
+        body: JSON.stringify(account),
+        encrypt: true
+      }
+      const postedData = await postData(fileData);
+      console.log(postedData);
+    } else if(page === 'payment-canceled') {
+      setPage('user');
     } else {
       setPage(page);
     }
@@ -36,6 +56,7 @@ class App extends React.Component {
           list={lists[listSelectionCount]}
         />
         <ConnectionModal />
+        <FormBuilder />
         <BrowserRouter>
           {
             userSession.isUserSignedIn() ? 

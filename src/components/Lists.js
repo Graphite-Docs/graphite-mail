@@ -36,16 +36,21 @@ export default class Lists extends React.Component {
       this.setState({ showConfirmDelete: false });
     }
 
+    handleFormBuilder = () => {
+      document.getElementById('form-builder-modal').style.display = "block";
+      document.getElementById('dimmer').style.display = "block";
+    }
+
     render() {
         const { proUser, lists, listSelectionCount } = this.global;
         const { showConfirmDelete, showListDeleteConfirm } = this.state;
         return(
             <div className="content">
-                {
+                {/*
                   proUser ? 
                   <div style={{marginBottom: "20px"}}><button className="btn btn-round">Create New List</button></div> : 
                   <div style={{marginBottom: "20px"}}><p>Want to add more than one list?</p><button className="btn btn-round">Upgrade Now</button></div>
-                }
+                */}
 
                 {
                   lists.length > 0 ?

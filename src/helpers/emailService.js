@@ -34,14 +34,19 @@ export function handleConnection(e) {
 }
 
 export async function sendCampaign(params) {
+      const userSession = getGlobal().userSession;
+      const email = userSession.loadUserData().email;
+      console.log(email);
       const emailConnectionSettings = getGlobal().emailConnectionSettings;
       const payload = {
-          from: emailConnectionSettings.username,
-          to: params.recipients.toString(),
+          from: emailConnectionSettings.useHostedService ? email : emailConnectionSettings.username,
+          to: emailConnectionSettings.useHostedService ? params.recipients : params.recipients.toString(),
           html: params.html,
           text: "hi",
           subject: params.subject,
-          config: {
+          config: emailConnectionSettings.useHostedService ? {
+              useHostedService: true
+          } : {
               host: emailConnectionSettings.server,
               port: emailConnectionSettings.port,
               secure: emailConnectionSettings.port === 465 ? true : false,
@@ -59,7 +64,7 @@ export async function sendCampaign(params) {
       let parsed = JSON.parse(stringified);
       console.log(parsed);
       const instance = axios.create({
-        baseURL: 'http://localhost:4001',
+        baseURL: process.env.NODE_ENV === "production" ? "https://immense-taiga-88779.herokuapp.com/" : "http://localhost:4001",
         headers: {
             'Content-Type': 'application/json'
         }
@@ -67,7 +72,7 @@ export async function sendCampaign(params) {
       instance.post('/emails/new', JSON.stringify(payload))
         .then(async (res) => {
             console.log(res)
-            if(res.data.messageId) {
+            if(res.data.messageId || res.data.success) {
                 let campaigns = getGlobal().campaigns;
                 const campaignPayload = {
                     id: uuid(), 
@@ -94,4 +99,22 @@ export async function sendCampaign(params) {
             }
         }).catch(err => console.log(err));
 
+}
+
+export async function connectedHostedService() {
+    setGlobal({ connectionStatus: "Connecting..."})
+    let emailConnectionSettings = getGlobal().emailConnectionSettings;
+    emailConnectionSettings['useHostedService'] = true;
+    setGlobal({ emailConnectionSettings });
+    const connectionFile = {
+        fileName: 'connection.json',
+        body: JSON.stringify(emailConnectionSettings),
+        encrypt: true
+    }
+    
+    const postedConnection = await postData(connectionFile);
+    console.log(postedConnection);
+
+    document.getElementById('dimmer').style.display = "none";
+    document.getElementById('connection-modal').style.display = "none";
 }

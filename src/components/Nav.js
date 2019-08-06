@@ -22,7 +22,7 @@ export default class Nav extends React.Component {
                         <span className="navbar-toggler-bar bar3"></span>
                     </button>
                     </div>
-                    <Link to={'/'} className="navbar-brand">Graphite Mail</Link>
+                    <Link to={'/'} className="navbar-brand">Mailr</Link>
                 </div>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-bar navbar-kebab"></span>

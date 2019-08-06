@@ -56,7 +56,8 @@ export default class Campaign extends React.Component {
                 listName: selectedList.listName 
             }
             sendCampaign(payload);
-            this.setState({ selectedTemplate: {}, selectedList: {}})
+            this.setState({ submitConfirm: false });
+            this.closeModal()
         } else {
             document.getElementById('errors').style.display = "block";
         }

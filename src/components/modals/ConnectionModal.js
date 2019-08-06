@@ -1,5 +1,5 @@
 import React from 'reactn';
-import { handleConnection } from '../../helpers/emailService';
+import { handleConnection, connectedHostedService } from '../../helpers/emailService';
 
 export default class ConnectionModal extends React.Component {
     constructor(props) {
@@ -18,7 +18,8 @@ export default class ConnectionModal extends React.Component {
         handleConnection(e);
     }
     render() {
-        const { emailConnected, emailConnectionSettings } = this.global;
+        const { emailConnected, emailConnectionSettings, proUser } = this.global;
+        console.log(emailConnectionSettings)
         const { edit } = this.state;
         return (
             <div style={{display: "none"}} id="connection-modal" className="custom-modal">
@@ -27,6 +28,7 @@ export default class ConnectionModal extends React.Component {
                     !emailConnected ? 
                     <div>
                         <h3>Connect Email Service</h3>
+                        <p>Note: Gmail does not always work properly and is not an ideal account to use. If using Gmail, you will need to enable <a href="https://support.google.com/accounts/answer/6010255?hl=en">"Less Secure"</a> apps as Mailr does not support OAuth at this time. Mailr holds no liability if you choose to go this route and we recommend you use a different email service instead.</p>
                         <form onSubmit={(e) => handleConnection(e)}>
                             <input id="server-input" className="form-control" placeholder="smtp.your-email.com" type="text" />
                             <label>SMTP Server URL</label>
@@ -39,10 +41,17 @@ export default class ConnectionModal extends React.Component {
                             <div>
                                 <button type="submit" className="btn btn-primary btn-round">Connect</button>
                             </div>
-                            
+                            {
+                                proUser ? 
+                                <div>
+                                    <p>Alternatively, you can connect to Mailr's hosted email service</p>
+                                    <button onClick={connectedHostedService} className="btn btn-round">Use Hosted Service</button>
+                                </div> : 
+                                <div/>
+                            }
                         </form>
                     </div> : 
-                    edit ? 
+                    edit ?
                     <div>
                         <h3>Update Email Service</h3>
                         <form onSubmit={(e) => this.handleConnection(e)}>
@@ -57,19 +66,42 @@ export default class ConnectionModal extends React.Component {
                             <div>
                                 <button type="submit" className="btn btn-primary btn-round">Connect</button> <button onClick={() => this.setState({ edit: false })} className="btn btn-round">Cancel</button>
                             </div>
-                            
+                            {
+                                proUser ? 
+                                <div>
+                                    <p>Alternatively, you can connect to Mailr's hosted email service</p>
+                                    <button onClick={connectedHostedService} className="btn btn-round">Use Hosted Service</button>
+                                </div> : 
+                                <div/>
+                            }
                         </form>
+                    </div> : 
+                    emailConnectionSettings.useHostedService ? 
+                    <div>
+                        <div>
+                            <h3 style={{marginTop: "25px"}}>You are using Mailr's hosted email service</h3>
+                            <p>Would you like to connect to your own email provider?</p>
+                            <button onClick={() => this.setState({ edit: true})} className="btn btn-round">Yes</button>
+                        </div>
                     </div> : 
                     <div>
                         <h3>Email Service</h3>
                         <p>SMTP Server URL: <span>{emailConnectionSettings.server}</span></p>
                         <p>Port: <span>{emailConnectionSettings.port}</span></p>
                         <p>Username: <span>{emailConnectionSettings.username}</span></p>
-                        <p>Password: <span className="hidden-field">{emailConnectionSettings.password}</span></p>
+                        <p>Password: <span className="hidden-field">{emailConnectionSettings.password.replace(/./gi, "*")}</span></p>
                         <button onClick={() => this.setState({ edit: true })}className="btn btn-round">Make Changes?</button>
+                        {
+                            proUser ? 
+                            <div>
+                                <p>Or, you can connect to Mailr's hosted email service</p>
+                                <button onClick={connectedHostedService} className="btn btn-round">Use Hosted Service</button>
+                            </div> : 
+                            <div/>
+                        }
                     </div>
                 }
-                
+           
             </div>
         )
     }

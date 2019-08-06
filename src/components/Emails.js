@@ -7,7 +7,8 @@ export default class Emails extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        showConfirmDelete: false
+        showConfirmDelete: false, 
+        campaign: {}
       }
     }
     handleNewCampaign = async () => {
@@ -35,9 +36,27 @@ export default class Emails extends React.Component {
       handleDelete(templateId);
       this.setState({ showConfirmDelete: false });
     }
+
+    loadCampaign = async (id) => {
+      const { campaigns } = this.global;
+      const campaign = campaigns.filter(x => x.id === id)[0];
+      console.log(campaign);
+      await this.setState({ campaign });
+      document.getElementById('single-campaign-modal').style.display = "block";
+      document.getElementById('dimmer').style.display = "block";
+    }
+
+    handleClose = () => {
+      document.getElementById('single-campaign-modal').style.display = "none";
+      document.getElementById('dimmer').style.display = "none";
+      this.setState({ campaign: {} });
+    }
+
     render() {
         const { emailConnected, templates, campaigns } = this.global;
-        const { showConfirmDelete } = this.state;
+        const { showConfirmDelete, campaign } = this.state;
+        let singleCampaign = {name: "", recipients: []};
+        campaign.recipients ? singleCampaign = campaign : singleCampaign = {name: "", recipients: []};
         return(
             <div className="content">
               {
@@ -116,6 +135,20 @@ export default class Emails extends React.Component {
                       </div>
                     </div>   
                   </div>
+
+                  <div style={{display: "none"}} id='single-campaign-modal' className="custom-modal">
+                      <button onClick={this.handleClose} style={{marginRight: "5px", float: "right"}} className="btn btn-round">X</button>
+                      <h3>{campaign.name}</h3>
+                      <p>Recipients</p>
+                      <ul>
+                        {singleCampaign.recipients.map(a => {
+                          return(
+                            <li key={a}>{a}</li>
+                          )
+                        })}
+                      </ul>
+                  </div>
+
                 </div>  : 
                 <ConnectEmailService />
               }

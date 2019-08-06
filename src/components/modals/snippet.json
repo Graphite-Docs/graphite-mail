@@ -1,0 +1,6 @@
+{
+    "emailOnly": "<form action='http://localhost:4001/addContact'><input type='text' id='email-input'/><label for='email-input'><br/>Email Address</label><br/><button type='submit'>Submit</form>", 
+    "emailOrg": "<form action='http://localhost:4001/addContact'><input type='text' id='email-input'/><label for='email-input'><br/>Email Address</label><br/><input type='text' id='org-input'/><label for='org-input'><br/>Organization Name</label><br/><button type='submit'>Submit</form>", 
+    "emailName": "<form action='http://localhost:4001/addContact'><input type='text' id='email-input'/><label for='email-input'><br/>Email Address</label><br/><input type='text' id='name-input'/><label for='name-input'><br/>Name</label><br/><button type='submit'>Submit</form>",
+    "emailNameOrg": "<form action='http://localhost:4001/addContact'><input type='text' id='email-input'/><label for='email-input'><br/>Email Address</label><br/><input type='text' id='name-input'/><label for='name-input'><br/>Name</label><br/><input type='text' id='org-input'/><label for='org-input'><br/>Name</label><br/><button type='submit'>Submit</form>" 
+}

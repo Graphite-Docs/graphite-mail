@@ -7,8 +7,8 @@ export async function addContact(list) {
     const proUser = getGlobal().proUser;
     const newContact = {
         id: uuid(),
-        email: document.getElementById('name-input').value,
-        name: document.getElementById('email-input').value,
+        name: document.getElementById('name-input').value,
+        email: document.getElementById('email-input').value,
         org: document.getElementById('org-input').value,
         dateAdded: {
             year: new Date().getFullYear().toString(),
@@ -28,17 +28,13 @@ export async function addContact(list) {
         document.getElementById('dimmer').style.display = "none";
         document.getElementById('contact-modal').style.display = "none";
         //Here we save the file
-        if(proUser) {
-            //Will need DB and server support
-        } else {
-            const postedData = {
-                fileName:"lists.json",
-                body: JSON.stringify(lists),
-                encrypt: true
-            }
-            const thisPost = await postData(postedData);
-            console.log(thisPost);
+        const postedData = {
+            fileName:"lists.json",
+            body: JSON.stringify(lists),
+            encrypt: true
         }
+        const thisPost = await postData(postedData);
+        console.log(thisPost);
     } else {
         console.log("Error finding specified list")
     }
@@ -106,14 +102,22 @@ export async function confirmImport(list) {
     
 }
 
-export function handleAddList() {
+export async function handleAddList() {
     let lists = getGlobal().lists;
     const newList = {
         id: uuid(),
         listName: document.getElementById('list-name-input').value,
         contacts: []
     }
-    setGlobal({ lists: [...lists, newList] });
+    lists.push(newList);
+    setGlobal({ lists });
+    const postedData = {
+        fileName:"lists.json",
+        body: JSON.stringify(lists),
+        encrypt: true
+    }
+    const thisPost = await postData(postedData);
+    console.log(thisPost);
 }
 
 export async function handleDelete(listId, contactId) {

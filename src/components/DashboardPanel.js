@@ -5,12 +5,16 @@ const main = require('../helpers/main');
 
 export default class DashboardPanel extends React.Component {
     componentDidMount() {
-        main.initChartsPages();
+        setTimeout(() => {
+            if(document.getElementById('chartHours')){
+                main.initChartsPages()
+            }
+        }, 1250);
     }
     render() {
-        const { lists, proUser, emails, templates } = this.global;
+        const { lists, proUser, templates, campaigns } = this.global;
         const totalContacts = lists.flatMap((item) => item.contacts);
-        const totalEmailsSent = emails.flatMap((email) => email.to);
+        const totalEmailsSent = campaigns.flatMap((email) => email.recipients);
         return(
             <div className="content">
                 <div className="row">
@@ -50,7 +54,7 @@ export default class DashboardPanel extends React.Component {
                         </div>
                         <div className="col-7 col-md-8">
                             <div className="numbers">
-                            <p className="card-category">Emails Delivered</p>
+                            <p className="card-category">Emails Sent</p>
                             <p className="card-title">{totalEmailsSent.length}</p>
                             </div>
                         </div>
@@ -119,7 +123,7 @@ export default class DashboardPanel extends React.Component {
                 </div>
                 </div>
                 <div className="row">
-                <div className="col-md-8">
+                <div className="col-md-12">
                     <div style={{paddingBottom: "8px"}} className="card ">
                     <div className="card-header ">
                         <h5 className="card-title">Contacts By Month</h5>
@@ -132,7 +136,7 @@ export default class DashboardPanel extends React.Component {
                     </div>
                 </div>
 
-                <div className="col-md-4">
+                <div className="col-md-6">
                     <div className="card ">
                     <div className="card-header ">
                         <h5 className="card-title">Email Statistics</h5>
@@ -140,11 +144,6 @@ export default class DashboardPanel extends React.Component {
                     </div>
                     <div className="card-body ">
                         <canvas id="chartEmail"></canvas>
-                        <div className="legend">
-                        <i style={{marginLeft: "3px"}} className="fa fa-circle text-primary"></i> Opened
-                        <i style={{marginLeft: "3px"}} className="fa fa-circle text-warning"></i> Read
-                        <i style={{marginLeft: "3px"}} className="fa fa-circle text-gray"></i> Clicks
-                        </div>
                     </div>
                     
                     </div>

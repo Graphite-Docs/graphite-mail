@@ -123,11 +123,18 @@ export function initDocChart() {
 
 export function initChartsPages() {
     const lists = getGlobal().lists;
+    const campaigns = getGlobal().campaigns;
+    console.log(campaigns);
     const allContacts = lists.flatMap((item) => item.contacts)
     //Calculating the unique months contacts were added
     let monthAdded = allContacts.map((item) => monthMap[item.dateAdded.month]);
-    let uniqueMonths = [...new Set(monthAdded)];
-    console.log(uniqueMonths)
+    let uniqueMonths = [""]
+    uniqueMonths = [...uniqueMonths,...new Set(monthAdded)];
+    let uniqueMonthsEmails = [""];
+    let emailMonth = campaigns.map(x => monthMap[x.date.split('/')[0]]);
+    uniqueMonthsEmails = [...uniqueMonthsEmails, ...new Set(emailMonth)];
+    console.log(uniqueMonthsEmails);
+
     //End unique months
 
     //Calculating number of contacts by month
@@ -222,16 +229,16 @@ export function initChartsPages() {
     ctx = document.getElementById('chartEmail').getContext("2d");
     
     //Here we need to check on email statistics
-    const emails = getGlobal().emails;
-    const toStats = emails.flatMap((email) => email.to);
-    const opens = toStats.filter((email) => email.opened).length;
-    const read = toStats.filter((email) => email.opened).length;
-    const clicks = toStats.filter((email) => email.clicked).length;
+    
+    // const toStats = emails.flatMap((email) => email.to);
+    // const opens = toStats.filter((email) => email.opened).length;
+    // const read = toStats.filter((email) => email.opened).length;
+    // const clicks = toStats.filter((email) => email.clicked).length;
 
     myChart = new window.Chart(ctx, {
       type: 'pie',
       data: {
-        labels: [1, 2, 3],
+        labels: campaigns.map(x => x.name),
         datasets: [{
           label: "Emails",
           pointRadius: 0,
@@ -242,14 +249,14 @@ export function initChartsPages() {
             '#fcc468',
           ],
           borderWidth: 0,
-          data: [clicks, opens, read]
+          data: campaigns.map(x => x.recipients.length)
         }]
       },
 
       options: {
 
         legend: {
-          display: false
+          display: true
         },
 
         pieceLabel: {
@@ -259,7 +266,7 @@ export function initChartsPages() {
         },
 
         tooltips: {
-          enabled: false
+          enabled: true
         },
 
         scales: {
@@ -290,6 +297,66 @@ export function initChartsPages() {
         },
       }
     });
+
+    // ctx = document.getElementById('emailsByMonth').getContext("2d");
+    
+    // myChart = new window.Chart(ctx, {
+    //   type: 'bar',
+
+    //   data: {
+    //     labels: uniqueMonthsEmails,
+    //     datasets: [{
+    //         borderColor: "#6bd098",
+    //         backgroundColor: "#6bd098",
+    //         pointRadius: 0,
+    //         pointHoverRadius: 0,
+    //         borderWidth: 3,
+    //         data: contactCountArray
+    //       }
+    //     ]
+    //   },
+    //   options: {
+    //     legend: {
+    //       display: false
+    //     },
+
+    //     tooltips: {
+    //       enabled: false
+    //     },
+
+    //     scales: {
+    //       yAxes: [{
+
+    //         ticks: {
+    //           fontColor: "#9f9f9f",
+    //           beginAtZero: false,
+    //           maxTicksLimit: 5,
+    //           //padding: 20
+    //         },
+    //         gridLines: {
+    //           drawBorder: false,
+    //           zeroLineColor: "#ccc",
+    //           color: 'rgba(255,255,255,0.05)'
+    //         }
+
+    //       }],
+
+    //       xAxes: [{
+    //         barPercentage: 1.6,
+    //         gridLines: {
+    //           drawBorder: false,
+    //           color: 'rgba(255,255,255,0.1)',
+    //           zeroLineColor: "transparent",
+    //           display: false,
+    //         },
+    //         ticks: {
+    //           padding: 20,
+    //           fontColor: "#9f9f9f"
+    //         }
+    //       }]
+    //     },
+    //   }
+    // });
 
     // var speedCanvas = document.getElementById("speedChart");
 

@@ -28,7 +28,9 @@ setGlobal({
     emailTemplate: {},
     showTemplate: false,
     newCampaign: false,
-    selectedCampaign: {}
+    selectedCampaign: {}, 
+    accountInfo: {}, 
+    connectionStatus: ""
 })
 
 ReactDOM.render(<App />, document.getElementById('root'));
