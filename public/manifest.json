@@ -1,9 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Mailr",
+  "name": "Mailr - Email Lists and Campaigns",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "https://i.imgur.com/yt6GUlA.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
