@@ -17,7 +17,7 @@ export default class SignIn extends React.Component {
                             <button onClick={signIn} className="btn btn-primary btn-round">Sign In With Blockstack</button>
                             <div style={{marginTop: "35px", textAlign: "center"}}>
                                 <a href="https://mailr.email">About Mailr</a>
-                                <p>By using Mailr, you agree to abide by the <a href="https://app.graphitedocs.com/shared/docs/jehunter5811.id&id=1565189167736">terms of service</a>, which include an agreement to ensure you comply with all CAN-SPAM regulations.</p>
+                                <p>By using Mailr, you agree to abide by the <a href="https://app.graphitedocs.com/shared/docs/jehunter5811.id&id=1565189167736cd">terms of service</a>, which include an agreement to ensure you comply with all CAN-SPAM regulations.</p>
                             </div>
                         </div>
                     </div>

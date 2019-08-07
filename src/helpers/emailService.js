@@ -114,7 +114,7 @@ export async function connectedHostedService() {
     
     const postedConnection = await postData(connectionFile);
     console.log(postedConnection);
-
+    setGlobal({ connectionStatus: "", emailConnected: true});
     document.getElementById('dimmer').style.display = "none";
     document.getElementById('connection-modal').style.display = "none";
 }
