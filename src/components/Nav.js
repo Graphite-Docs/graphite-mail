@@ -30,7 +30,7 @@ export default class Nav extends React.Component {
                     <span className="navbar-toggler-bar navbar-kebab"></span>
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navigation">
-                    <form>
+                    {/*<form>
                     <div className="input-group no-border">
                         <input style={{backgroundColor: "#fff"}} type="text" className="form-control" placeholder="Search..." />
                         <div style={{backgroundColor: "#fff"}} className="input-group-append">
@@ -39,7 +39,7 @@ export default class Nav extends React.Component {
                         </div>
                         </div>
                     </div>
-                    </form>
+                    </form>*/}
                     <ul className="navbar-nav">
                     <li className="nav-item btn-rotate dropdown">
                         <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

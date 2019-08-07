@@ -13,7 +13,7 @@ export default class Footer extends React.Component {
                           </a>
                       </li>
                       <li>
-                          <a href="https://mailr.email/about">
+                          <a href="https://mailr.email">
                              About Us
                           </a>
                       </li>
@@ -23,7 +23,7 @@ export default class Footer extends React.Component {
                           </a>
                       </li>
                       <li>
-                          <a href="https://github.com/graphite-docs/graphite-mail">
+                          <a href="https://github.com/graphite-docs/mailr-client">
                               Github
                           </a>
                       </li>

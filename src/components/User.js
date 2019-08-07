@@ -39,7 +39,7 @@ export default class User extends React.Component {
         return(
           <div className="content">
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-12">
               <div className="card card-user">
                 <div className="image">
                   <img src="../assets/img/damir-bosnjak.jpg" alt="..." />
@@ -71,7 +71,7 @@ export default class User extends React.Component {
               </div>
               
             </div>
-            <div className="col-md-8">
+            {/*<div className="col-md-8">
               <div className="card card-user">
                 <div className="card-header">
                   <h5 className="card-title">Account Information</h5>
@@ -126,7 +126,7 @@ export default class User extends React.Component {
                   
                 </div>
               </div>
-            </div>
+                </div>*/}
           </div>
         </div>
         )
